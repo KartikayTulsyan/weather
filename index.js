@@ -6,33 +6,7 @@ const options = {
     }
 };
 
-// const now = new Date();
-// const options2 = { timeZone: 'Asia/Kolkata' };
-// const istDate = now.toLocaleString('en-US', options2);
-// console.log('IST date and time:', istDate);
 
-
-function updateDateTime() {
-    var now = new Date();
-    var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var dayOfWeek = dayNames[now.getDay()];
-    var month = monthNames[now.getMonth()];
-    var day = now.getDate();
-    var year = now.getFullYear();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    var amOrPm = hours < 12 ? 'AM' : 'PM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    if (hours === 12 && minutes == 60) { amOrPm = ''; }
-    var dateTimeString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year + ' ' + hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + amOrPm;
-    console.log(dateTimeString);
-}
-// updateDateTime(); // call function once to display initial value
-
-// update the date and time every second
-// setInterval(updateDateTime, 1000);
 
 
 
@@ -44,12 +18,7 @@ const getWeather = (city) => {
         .then(response => {
 
             console.log(response)
-            if (response.temp == undefined) {
-                document.getElementById('errordis').innerHTML = '<h1 id="errordis" class=" my-4 fw-normal">Sorry, cannot find ' + "'" + city + "'" + '. Try reloading the page.<span id="cityname" style="text-transform: capitalize;"></span></h1>'
-            }
 
-            else {
-                document.getElementById('errordis').innerHTML='<h1 id="errordis" class=" my-4 fw-normal">Weather for <span id="cityname" style="text-transform: capitalize;"></span></h1>'
                 cityname.innerHTML = city;
 
                 cloud_pct.innerHTML = response.cloud_pct;
@@ -80,7 +49,7 @@ const getWeather = (city) => {
                 const utcTime2 = sunriseDate2.toUTCString(); // Convert to UTC time string
                 const istTime2 = new Date(utcTime2).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }); // Convert to IST time string    
                 sunset.innerHTML = istTime2;
-            }
+            
         })
         .catch(err => console.error(err));
 }
@@ -281,9 +250,13 @@ fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=san francisc
 
 getWeather("Delhi");
 
-submit.addEventListener("click", (e) => {
+document.getElementById('submit').addEventListener("click", (e) => {
     e.preventDefault();
     getWeather(city.value);
+});
+document.getElementById('submit2').addEventListener("click", (e) => {
+    e.preventDefault();
+    getWeather(city2.value);
 });
 
 
@@ -304,6 +277,6 @@ if (navigator.geolocation) {
         }
     });
 }
-    //  else {
-        //     alert("Geolocation is not supported by this browser.");
-        // }
+     else {
+            alert("Geolocation is not supported by this browser.");
+        }
