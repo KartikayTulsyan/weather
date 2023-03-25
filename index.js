@@ -250,15 +250,6 @@ fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=san francisc
 
 getWeather("Delhi");
 
-document.getElementById('submit').addEventListener("click", (e) => {
-    e.preventDefault();
-    getWeather(city.value);
-});
-document.getElementById('submit2').addEventListener("click", (e) => {
-    e.preventDefault();
-    getWeather(city2.value);
-});
-
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -280,3 +271,13 @@ if (navigator.geolocation) {
      else {
             alert("Geolocation is not supported by this browser.");
         }
+
+
+document.getElementById('submit').addEventListener("click", (e) => {
+    e.preventDefault();
+    getWeather(city.value);
+});
+document.getElementById('submit2').addEventListener("click", (e) => {
+    e.preventDefault();
+    getWeather(city2.value);
+});
